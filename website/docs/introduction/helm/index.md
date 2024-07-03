@@ -46,12 +46,12 @@ $ helm repo add bitnami https://charts.bitnami.com/bitnami
 $ helm repo update
 ```
 
-Now we can search the repository for charts, for example the `postgresql` chart:
+Now we can search the repository for charts, for example the `nginx` chart:
 
 ```bash
 $ helm search repo postgresql
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-bitnami/postgresql      X.X.X           X.X.X           PostgreSQL (Postgres) is an open source object-...
+bitnami/nginx                           18.1.3          1.27.0          NGINX Open Source is a web server that can be a...
 [...]
 ```
 
@@ -60,6 +60,7 @@ bitnami/postgresql      X.X.X           X.X.X           PostgreSQL (Postgres) is
 Let's install an NGINX server in our EKS cluster using the Helm chart we found above. When you install a chart using the Helm package manager, it creates a new **release** for that chart. Each release is tracked by Helm and can be upgraded, rolled back, or uninstalled independently from other releases.
 
 ```bash
+$ NGINX_CHART_VERSION=$(helm search repo nginx --output json | jq -r '.[] | select(.name=="bitnami/nginx") | .version')
 $ echo $NGINX_CHART_VERSION
 $ helm install nginx bitnami/nginx \
   --version $NGINX_CHART_VERSION \
@@ -68,6 +69,7 @@ $ helm install nginx bitnami/nginx \
 
 We can break this command down as follows:
 
+- Set the current version of ngninx as $NGINX_CHART_VERSION
 - Use the `install` sub-command to instruct Helm to install a chart
 - Name the release `nginx`
 - Use the chart `bitnami/nginx` with the version $NGINX_CHART_VERSION
