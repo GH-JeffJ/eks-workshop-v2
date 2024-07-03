@@ -51,7 +51,7 @@ Now we can search the repository for charts, for example the `nginx` chart:
 ```bash
 $ helm search repo postgresql
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-bitnami/nginx                           18.1.3          1.27.0          NGINX Open Source is a web server that can be a...
+bitnami/nginx           x.x.x           x.x.x           NGINX Open Source is a web server that can be a...
 [...]
 ```
 
